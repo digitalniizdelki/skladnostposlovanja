@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Compliance — register regulative in vplivov</title>
+<style>
+:root{
+  --ink:#14181f; --ink-2:#232a35; --line:#d7d3c8; --line-2:#e9e5db;
+  --paper:#f6f4ef; --paper-2:#ffffff; --muted:#6b7280;
+  --amber:#b9761a; --amber-bg:#fbf0dd;
+  --brick:#9c2f24; --brick-bg:#fae7e3;
+  --sage:#2f6b4f; --sage-bg:#e2efe6;
+  --blue:#2b4a7d; --blue-bg:#e5ebf5;
+  --focus:#2b4a7d;
+  --r:6px;
+  --sans:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e8e6e1; --ink-2:#c3c7ce; --line:#333a46; --line-2:#272d38;
+    --paper:#14181f; --paper-2:#1a1f28; --muted:#949aa5;
+    --amber:#e0a43f; --amber-bg:#3a2d16;
+    --brick:#e07a6c; --brick-bg:#3b211d;
+    --sage:#7fc49c; --sage-bg:#1c3328;
+    --blue:#8fb0e4; --blue-bg:#1d2740;
+    --focus:#8fb0e4;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#e8e6e1; --ink-2:#c3c7ce; --line:#333a46; --line-2:#272d38;
+  --paper:#14181f; --paper-2:#1a1f28; --muted:#949aa5;
+  --amber:#e0a43f; --amber-bg:#3a2d16;
+  --brick:#e07a6c; --brick-bg:#3b211d;
+  --sage:#7fc49c; --sage-bg:#1c3328;
+  --blue:#8fb0e4; --blue-bg:#1d2740;
+  --focus:#8fb0e4;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:var(--blue)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ---------- okvir ---------- */
+.top{display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:1px solid var(--line);background:var(--paper-2);position:sticky;top:0;z-index:30;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-size:19px;letter-spacing:.2px;display:flex;align-items:baseline;gap:9px}
+.brand small{font-family:var(--sans);font-size:11px;color:var(--muted);letter-spacing:.3px}
+.top .spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:100px;padding:4px 11px;font-size:12px;color:var(--ink-2);background:transparent}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--muted);flex:none}
+.dot.ok{background:var(--sage)} .dot.warn{background:var(--amber)} .dot.off{background:var(--muted)}
+.shell{display:grid;grid-template-columns:212px 1fr;min-height:calc(100vh - 53px)}
+nav.side{border-right:1px solid var(--line);padding:14px 10px;background:var(--paper-2)}
+nav.side .grp{font-size:11px;color:var(--muted);padding:12px 10px 5px;letter-spacing:.4px}
+nav.side button{display:flex;width:100%;gap:9px;align-items:center;background:none;border:0;text-align:left;padding:7px 10px;border-radius:var(--r);cursor:pointer;color:var(--ink-2)}
+nav.side button:hover{background:var(--line-2)}
+nav.side button.on{background:var(--ink);color:var(--paper-2)}
+nav.side button .cnt{margin-left:auto;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+nav.side button.on .cnt{color:var(--paper-2);opacity:.75}
+main{padding:22px 24px 70px;max-width:1220px;min-width:0}
+h1{font-family:var(--serif);font-size:25px;font-weight:600;margin:0 0 4px}
+h2{font-family:var(--serif);font-size:18px;font-weight:600;margin:26px 0 10px}
+.sub{color:var(--muted);margin:0 0 18px;max-width:72ch}
+
+/* ---------- gradniki ---------- */
+.btn{border:1px solid var(--line);background:var(--paper-2);padding:6px 12px;border-radius:var(--r);cursor:pointer}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.btn.sm{padding:3px 9px;font-size:12px}
+.btn.danger{color:var(--brick);border-color:var(--brick)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.card{border:1px solid var(--line);background:var(--paper-2);border-radius:var(--r);padding:14px 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.kpi{background:var(--paper-2);padding:12px 14px}
+.kpi b{display:block;font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15}
+.kpi span{font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11.5px;color:var(--muted);font-weight:600;padding:7px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+tr.clickable{cursor:pointer}
+tr.clickable:hover td{background:var(--line-2)}
+.tablewrap{border:1px solid var(--line);border-radius:var(--r);overflow-x:auto;background:var(--paper-2)}
+.tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:100px;padding:1px 8px;margin:1px 3px 1px 0;color:var(--ink-2);white-space:nowrap}
+.badge{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:100px;white-space:nowrap}
+.b-amber{background:var(--amber-bg);color:var(--amber)} .b-brick{background:var(--brick-bg);color:var(--brick)}
+.b-sage{background:var(--sage-bg);color:var(--sage)} .b-blue{background:var(--blue-bg);color:var(--blue)}
+.b-grey{background:var(--line-2);color:var(--muted)}
+.mono{font-family:var(--mono);font-size:12px}
+.num{font-variant-numeric:tabular-nums}
+input[type=text],input[type=date],input[type=number],input[type=password],select,textarea{
+  width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);}
+textarea{min-height:90px;resize:vertical;line-height:1.55}
+label.f{display:block;margin-bottom:12px}
+label.f>span{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.toolbar{display:flex;gap:8px;align-items:center;margin:0 0 12px;flex-wrap:wrap}
+.toolbar input[type=text]{width:240px}
+.toolbar select{width:auto}
+
+/* ---------- opozorila ---------- */
+.alert{border:1px solid var(--line);border-left:4px solid var(--amber);background:var(--paper-2);border-radius:var(--r);padding:13px 16px;margin-bottom:9px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.alert.late{border-left-color:var(--brick)}
+.alert.soon{border-left-color:var(--amber)}
+.alert.calm{border-left-color:var(--blue)}
+.alert .lead{flex:1;min-width:260px}
+.alert .lead p{margin:0 0 3px;font-size:15px}
+.alert .meta{color:var(--muted);font-size:12.5px}
+.alert .impact{font-weight:600}
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:26px;text-align:center;color:var(--muted)}
+
+/* ---------- predal ---------- */
+.scrim{position:fixed;inset:0;background:rgba(10,12,16,.45);z-index:50;display:none}
+.scrim.on{display:block}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(640px,100%);background:var(--paper);border-left:1px solid var(--line);z-index:51;overflow:auto;transform:translateX(100%);transition:transform .18s ease}
+.drawer.on{transform:none}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+.drawer header{position:sticky;top:0;background:var(--paper-2);border-bottom:1px solid var(--line);padding:13px 18px;display:flex;gap:10px;align-items:center}
+.drawer .body{padding:18px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:13.5px;margin:10px 0 18px}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.list{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.list .it{padding:9px 12px;border-bottom:1px solid var(--line-2);display:flex;gap:10px;align-items:center}
+.list .it:last-child{border-bottom:0}
+.list .it .g{flex:1;min-width:0}
+.list .it small{color:var(--muted)}
+.bar{height:6px;background:var(--line-2);border-radius:100px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--sage)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--paper-2);padding:9px 16px;border-radius:100px;z-index:80;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.hint{font-size:12.5px;color:var(--muted);max-width:74ch}
+.split{display:grid;grid-template-columns:1fr 320px;gap:20px}
+@media (max-width:980px){
+  .shell{grid-template-columns:1fr}
+  nav.side{display:flex;overflow-x:auto;gap:4px;border-right:0;border-bottom:1px solid var(--line);padding:8px}
+  nav.side .grp{display:none}
+  nav.side button{width:auto;white-space:nowrap}
+  .split,.grid2{grid-template-columns:1fr}
+  main{padding:16px 14px 60px}
+}
+@media print{
+  nav.side,.top,.toolbar,.btn{display:none!important}
+  .shell{display:block}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand">AI Compliance <small>register regulative · vplivi · roki</small></div>
+  <div class="spacer"></div>
+  <span class="pill" id="storePill"><span class="dot off"></span><span id="storeTxt">Shramba: brskalnik</span></span>
+  <span class="pill" id="aiPill"><span class="dot off"></span><span id="aiTxt">AI izklopljen</span></span>
+  <button class="btn sm" id="setupBtn" title="Odpri nastavitve">⚙ Nastavitve</button>
+  <button class="btn sm" id="themeBtn" title="Preklopi temo">Tema</button>
+  <button class="btn sm" id="saveBtn">Shrani zdaj</button>
+</div>
+
+<div class="shell">
+  <nav class="side" id="nav"></nav>
+  <main id="view"></main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <header><strong id="drawerTitle">Podrobnosti</strong><div class="spacer" style="flex:1"></div><button class="btn sm" id="drawerClose">Zapri</button></header>
+  <div class="body" id="drawerBody"></div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   AI Compliance — enodatotečna aplikacija.
+   Podatki: ena JSON datoteka v mapi po izbiri (File System Access API)
+   + varnostna kopija v brskalniku. Deluje popolnoma brez AI.
+   ============================================================ */
+
+const APP_VERSION = "1.0";
+const FILE_NAME = "ai-compliance-data.json";
+const LS_KEY = "ai_compliance_state_v1";
+
+/* ---------- pripomočki ---------- */
+const $ = (s,r=document)=>r.querySelector(s);
+const uid = p => (p||"id") + "_" + Math.random().toString(36).slice(2,9);
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const todayISO = () => new Date().toISOString().slice(0,10);
+function daysUntil(d){ if(!d) return null; const a=new Date(d+"T00:00:00"), b=new Date(todayISO()+"T00:00:00"); return Math.round((a-b)/86400000); }
+function fmtDate(d){ if(!d) return "—"; const p=d.split("-"); return p[2]+"."+p[1]+"."+p[0]; }
+function rokLabel(d){ const n=daysUntil(d); if(n===null) return "brez roka"; if(n<0) return Math.abs(n)+" dni prepozno"; if(n===0) return "rok je danes"; return n+" dni"; }
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("on"),2200); }
+function download(name, text, type){
+  const b = new Blob([text], {type:type||"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(b); a.download = name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+}
+
+/* ---------- šifranti ---------- */
+const STATUSI = {
+  nova:        {l:"Nova / nepregledana", c:"b-amber", score:0},
+  analiza:     {l:"V analizi vpliva",    c:"b-blue",  score:25},
+  izvajanje:   {l:"V izvajanju",         c:"b-blue",  score:55},
+  skladno:     {l:"Skladno",             c:"b-sage",  score:100},
+  neskladno:   {l:"Neskladno",           c:"b-brick", score:0},
+  nerelevantno:{l:"Ni relevantno",       c:"b-grey",  score:null}
+};
+const TVEGANJA = { kriticno:{l:"Kritično",c:"b-brick",w:4}, visoko:{l:"Visoko",c:"b-brick",w:3}, srednje:{l:"Srednje",c:"b-amber",w:2}, nizko:{l:"Nizko",c:"b-grey",w:1} };
+const VRSTE = ["zakon","uredba EU","direktiva EU","podzakonski akt","smernica nadzornika","standard","interno"];
+const SEKTORJI = ["bančništvo","zavarovalništvo","farmacija","energetika","splošno"];
+const NALOGA_ST = { odprta:{l:"Odprta",c:"b-amber"}, v_teku:{l:"V teku",c:"b-blue"}, koncana:{l:"Končana",c:"b-sage"} };
+
+/* ---------- začetni (demo) podatki ---------- */
+function seed(){
+  const o = (name,type,email)=>({id:uid("own"),name,type,email});
+  const own = [
+    o("Legal Department","oddelek","legal@podjetje.si"),
+    o("Compliance Office","oddelek","compliance@podjetje.si"),
+    o("IT Security","oddelek","soc@podjetje.si"),
+    o("Upravljanje tveganj","oddelek","risk@podjetje.si"),
+    o("Kadrovska služba","oddelek","hr@podjetje.si"),
+    o("Nabava","oddelek","nabava@podjetje.si"),
+    o("Podatkovna analitika","oddelek","analitika@podjetje.si"),
+    o("Kakovost","oddelek","kakovost@podjetje.si")
+  ];
+  const R = (code,title,type,authority,sector,eff,url)=>({id:uid("reg"),code,title,type,authority,sector,effective:eff,url,notes:""});
+  const regs = [
+    R("GDPR","Splošna uredba o varstvu podatkov (EU) 2016/679","uredba EU","Evropski parlament",["splošno"],"2018-05-25","https://eur-lex.europa.eu"),
+    R("DORA","Digitalna operativna odpornost finančnega sektorja (EU) 2022/2554","uredba EU","EU / EBA",["bančništvo","zavarovalništvo"],"2025-01-17",""),
+    R("NIS2","Direktiva o kibernetski varnosti (EU) 2022/2555","direktiva EU","EU / Uprava RS za informacijsko varnost",["energetika","bančništvo"],"2024-10-18",""),
+    R("AI-ACT","Uredba o umetni inteligenci (EU) 2024/1689","uredba EU","EU",["splošno"],"2026-08-02",""),
+    R("ZPPDFT-2","Zakon o preprečevanju pranja denarja in financiranja terorizma","zakon","Urad RS za preprečevanje pranja denarja",["bančništvo","zavarovalništvo"],"2023-01-01",""),
+    R("GMP-A11","EU GMP Priloga 11 — računalniško podprti sistemi","smernica nadzornika","EMA / JAZMP",["farmacija"],"2011-06-30",""),
+    R("SOLV2","Solventnost II — upravljanje in poročanje","direktiva EU","EIOPA / AZN",["zavarovalništvo"],"2016-01-01",""),
+    R("EZ-1","Energetski zakon — obratovalna zanesljivost in poročanje","zakon","Agencija za energijo",["energetika"],"2014-03-22","")
+  ];
+  const byCode = c => { const f = regs.find(r=>r.code===c); return f ? f.id : regs[0].id; };
+  const P = (code,name,dep,crit,tags,systems,desc)=>({id:uid("prc"),code,name,department:dep,criticality:crit,tags,systems,description:desc});
+  const procs = [
+    P("P-01","Sprejem novih strank (KYC / onboarding)","Poslovna mreža","kriticno",["stranke","identifikacija","osebni podatki","pranje denarja"],"CRM, KYC portal","Zajem in preverjanje podatkov o stranki, identifikacija, skrbni pregled."),
+    P("P-02","Spremljanje transakcij in sumljivih poslov","Compliance Office","kriticno",["pranje denarja","transakcije","poročanje","nadzor"],"AML monitoring","Zaznava nenavadnih vzorcev, priprava prijav uradu."),
+    P("P-03","Odobritev kredita","Kreditno poslovanje","visoko",["odločanje","profiliranje","osebni podatki","umetna inteligenca"],"Scoring engine","Ocena kreditne sposobnosti, delno avtomatizirano odločanje."),
+    P("P-04","Upravljanje incidentov IKT","IT Security","kriticno",["incident","kibernetska varnost","poročanje","roki"],"SIEM, ticketing","Zaznava, razvrstitev, obvladovanje in prijava incidentov."),
+    P("P-05","Upravljanje zunanjih izvajalcev in oblaka","Nabava","visoko",["pogodbe","zunanje izvajanje","oblak","tveganja"],"Register pogodb","Izbor, pogodbe, nadzor kritičnih dobaviteljev in oblačnih storitev."),
+    P("P-06","Neprekinjeno poslovanje in testiranje odpornosti","Upravljanje tveganj","kriticno",["odpornost","testiranje","scenariji","obnovitev"],"BCM orodje","Načrti neprekinjenega poslovanja, testi obnovitve, scenarijske vaje."),
+    P("P-07","Obravnava zahtev posameznikov glede osebnih podatkov","Legal Department","visoko",["osebni podatki","pravice","roki","zahtevek"],"Portal zahtev","Dostop, izbris, popravek, ugovor — v zakonskih rokih."),
+    P("P-08","Vodenje evidence dejavnosti obdelave","Legal Department","srednje",["osebni podatki","evidenca","dokumentacija"],"Register obdelav","Evidenca obdelav, pravne podlage, roki hrambe."),
+    P("P-09","Trženjske kampanje in profiliranje","Marketing","srednje",["osebni podatki","privolitev","profiliranje","trženje"],"Marketing automation","Segmentacija, privolitve, komunikacija s strankami."),
+    P("P-10","Razvoj in validacija modelov","Podatkovna analitika","visoko",["umetna inteligenca","model","validacija","dokumentacija","pristranskost"],"MLOps","Razvoj, validacija, spremljanje in dokumentiranje modelov."),
+    P("P-11","Proizvodnja serije in sproščanje","Proizvodnja","kriticno",["proizvodnja","validacija","sledljivost","zapisi"],"MES, LIMS","Izdelava serije, kontrole, sproščanje na trg."),
+    P("P-12","Validacija računalniško podprtih sistemov","Kakovost","visoko",["validacija","sistemi","zapisi","revizijska sled"],"eQMS","Kvalifikacija in validacija sistemov, ki vplivajo na kakovost."),
+    P("P-13","Obratovanje in vzdrževanje omrežja","Obratovanje","kriticno",["obratovanje","zanesljivost","kibernetska varnost","poročanje"],"SCADA","Nadzor omrežja, vzdrževanje, obvladovanje motenj."),
+    P("P-14","Poročanje nadzornim organom","Compliance Office","visoko",["poročanje","roki","podatki","nadzor"],"Reg reporting","Priprava in oddaja rednih ter izrednih poročil."),
+    P("P-15","Zaposlovanje in usposabljanje","Kadrovska služba","srednje",["zaposleni","usposabljanje","osebni podatki","evidenca"],"HRIS","Zaposlovanje, obvezna usposabljanja, evidence prisotnosti.")
+  ];
+  const pol = (code,title,ownerName,ver,last,next,tags,status)=>({id:uid("pol"),code,title,owner:ownerName,version:ver,lastReview:last,nextReview:next,tags,status});
+  const pols = [
+    pol("POL-01","Politika varstva osebnih podatkov","Legal Department","3.1","2025-11-04","2026-11-04",["osebni podatki","pravice","hramba"],"veljavna"),
+    pol("POL-02","Politika informacijske varnosti","IT Security","4.0","2026-02-10","2027-02-10",["kibernetska varnost","dostopi","incident"],"veljavna"),
+    pol("POL-03","Politika obvladovanja incidentov IKT","IT Security","1.2","2025-09-01","2026-09-01",["incident","poročanje","roki"],"v prenovi"),
+    pol("POL-04","Politika zunanjega izvajanja in oblačnih storitev","Nabava","2.0","2025-06-15","2026-06-15",["zunanje izvajanje","oblak","pogodbe"],"veljavna"),
+    pol("POL-05","Politika preprečevanja pranja denarja","Compliance Office","5.0","2026-01-20","2027-01-20",["pranje denarja","stranke","poročanje"],"veljavna"),
+    pol("POL-06","Politika odgovorne uporabe umetne inteligence","Upravljanje tveganj","0.9","2026-05-02","2026-11-02",["umetna inteligenca","model","nadzor"],"osnutek")
+  ];
+  const ownId = n => { const f = own.find(x=>x.name===n); return f ? f.id : own[0].id; };
+  const Q = (reg,code,title,desc,tags,risk,due,owner,status)=>({
+    id:uid("req"), regId:byCode(reg), code, title, description:desc, tags, risk, due,
+    ownerId: ownId(owner), status, linked:[], excluded:[], evidence:"", created:todayISO()
+  });
+  const reqs = [
+    Q("DORA","DORA-19","Prijava večjih incidentov IKT v predpisanih rokih",
+      "Zavezanec mora večji incident IKT prijaviti pristojnemu organu z začetnim obvestilom, vmesnim in končnim poročilom. Zahteva klasifikacijo incidenta, evidenco, roke obveščanja in obveščanje strank.",
+      ["incident","poročanje","roki","kibernetska varnost","nadzor"],"kriticno", plusDays(43),"Legal Department","nova"),
+    Q("DORA","DORA-28","Pogodbena ureditev kritičnih zunanjih izvajalcev IKT",
+      "Pogodbe s ponudniki storitev IKT morajo vsebovati pravice do dostopa, revizije in nadzora, izhodne strategije ter ravni storitev. Vodi se register vseh pogodbenih razmerij.",
+      ["zunanje izvajanje","pogodbe","oblak","tveganja","register"],"visoko", plusDays(96),"Nabava","analiza"),
+    Q("DORA","DORA-24","Program testiranja digitalne operativne odpornosti",
+      "Zavezanec vzpostavi program testiranja odpornosti, vključno s scenarijskim testiranjem in testi obnovitve, ter odpravlja ugotovljene pomanjkljivosti.",
+      ["odpornost","testiranje","scenariji","obnovitev"],"visoko", plusDays(150),"Upravljanje tveganj","izvajanje"),
+    Q("AI-ACT","AI-9","Sistem obvladovanja tveganj za visokotvegane sisteme UI",
+      "Za sisteme umetne inteligence z visokim tveganjem je treba vzpostaviti in vzdrževati dokumentiran sistem obvladovanja tveganj skozi celoten življenjski cikel, vključno z upravljanjem podatkov in preprečevanjem pristranskosti.",
+      ["umetna inteligenca","model","tveganja","validacija","dokumentacija","pristranskost","profiliranje"],"visoko", plusDays(210),"Upravljanje tveganj","nova"),
+    Q("AI-ACT","AI-14","Človeški nadzor nad avtomatiziranim odločanjem",
+      "Sistemi UI morajo biti zasnovani tako, da jih lahko fizične osebe učinkovito nadzorujejo, vključno z možnostjo posega in razveljavitve odločitve.",
+      ["umetna inteligenca","odločanje","nadzor","profiliranje"],"srednje", plusDays(240),"Podatkovna analitika","nova"),
+    Q("GDPR","GDPR-12","Odziv na zahteve posameznikov v enem mesecu",
+      "Upravljavec mora na zahtevo posameznika odgovoriti brez nepotrebnega odlašanja, najkasneje v enem mesecu od prejema zahteve.",
+      ["osebni podatki","pravice","roki","zahtevek"],"visoko","", "Legal Department","skladno"),
+    Q("GDPR","GDPR-30","Evidenca dejavnosti obdelave",
+      "Vodi se pisna evidenca dejavnosti obdelave z nameni, kategorijami posameznikov, roki hrambe in varnostnimi ukrepi.",
+      ["osebni podatki","evidenca","dokumentacija","hramba"],"srednje", plusDays(20),"Legal Department","izvajanje"),
+    Q("NIS2","NIS2-21","Ukrepi za obvladovanje kibernetskih tveganj",
+      "Zavezanec uvede tehnične in organizacijske ukrepe: analizo tveganj, obvladovanje incidentov, neprekinjeno poslovanje, varnost dobavne verige in usposabljanje zaposlenih.",
+      ["kibernetska varnost","incident","dobavna veriga","usposabljanje","obratovanje"],"kriticno", plusDays(-8),"IT Security","neskladno"),
+    Q("ZPPDFT-2","AML-17","Poglobljen skrbni pregled stranke",
+      "Pri povečanem tveganju se izvede poglobljen pregled stranke, ugotovi izvor sredstev in okrepi spremljanje poslovnega razmerja.",
+      ["pranje denarja","stranke","identifikacija","nadzor","transakcije"],"visoko", plusDays(61),"Compliance Office","analiza"),
+    Q("GMP-A11","A11-4","Validacija računalniško podprtih sistemov",
+      "Sistemi, ki vplivajo na kakovost zdravila, morajo biti validirani, z dokumentirano revizijsko sledjo in obvladovanjem sprememb.",
+      ["validacija","sistemi","zapisi","revizijska sled","proizvodnja"],"visoko", plusDays(120),"Kakovost","izvajanje"),
+    Q("EZ-1","EZ-88","Poročanje o motnjah v obratovanju",
+      "Operater mora agenciji poročati o motnjah v obratovanju omrežja in ukrepih za odpravo v predpisanih rokih.",
+      ["obratovanje","poročanje","roki","zanesljivost"],"srednje", plusDays(34),"Compliance Office","nova"),
+    Q("SOLV2","S2-41","Sistem upravljanja in ključne funkcije",
+      "Zavarovalnica vzpostavi učinkovit sistem upravljanja z jasnimi odgovornostmi, ključnimi funkcijami in rednim pregledom politik.",
+      ["upravljanje","politike","nadzor","dokumentacija"],"srednje", plusDays(75),"Compliance Office","analiza")
+  ];
+  const tasks = [
+    {id:uid("tsk"),reqId:reqs[0].id,title:"Uskladiti matriko klasifikacije incidentov z merili nadzornika",ownerId:ownId("IT Security"),due:plusDays(20),status:"v_teku",notes:""},
+    {id:uid("tsk"),reqId:reqs[7].id,title:"Dopolniti analizo tveganj dobavne verige",ownerId:ownId("Nabava"),due:plusDays(-3),status:"odprta",notes:"Zamuja, potrebna eskalacija."}
+  ];
+  return {
+    meta:{version:APP_VERSION, org:"Vaše podjetje d.d.", updated:new Date().toISOString()},
+    settings:{
+      ai:{enabled:false, mode:"cloudflare", accountId:"", token:"", model:"@cf/meta/llama-3.1-8b-instruct", endpoint:""},
+      match:{threshold:2, auto:true}
+    },
+    owners:own, regulations:regs, requirements:reqs, processes:procs, policies:pols, tasks:tasks,
+    log:[{ts:new Date().toISOString(), what:"Ustvarjen začetni nabor demo podatkov"}]
+  };
+}
+function plusDays(n){ const d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+
+/* ---------- stanje ---------- */
+let state = null;
+let dirHandle = null;
+let saveTimer = null;
+
+/* ---------- majhna IndexedDB shramba za ročico mape ---------- */
+function idb(){ return new Promise((res,rej)=>{ const r=indexedDB.open("aicompliance",1);
+  r.onupgradeneeded=()=>r.result.createObjectStore("kv"); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function kvSet(k,v){ const db=await idb(); return new Promise(r=>{ const t=db.transaction("kv","readwrite"); t.objectStore("kv").put(v,k); t.oncomplete=()=>r(); }); }
+async function kvGet(k){ const db=await idb(); return new Promise(r=>{ const t=db.transaction("kv","readonly"); const q=t.objectStore("kv").get(k); q.onsuccess=()=>r(q.result); q.onerror=()=>r(null); }); }
+
+/* ---------- shranjevanje ---------- */
+function markDirty(){
+  state.meta.updated = new Date().toISOString();
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){}
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>writeToDisk(true), 900);
+}
+async function writeToDisk(silent){
+  if(!dirHandle){ if(!silent) toast("Mapa ni izbrana — podatki so v brskalniku."); return false; }
+  try{
+    if(dirHandle.queryPermission){
+      const p = await dirHandle.queryPermission({mode:"readwrite"});
+      if(p!=="granted"){ if(silent) return false; const q=await dirHandle.requestPermission({mode:"readwrite"}); if(q!=="granted"){ toast("Ni dovoljenja za pisanje v mapo."); return false; } }
+    }
+    const fh = await dirHandle.getFileHandle(FILE_NAME, {create:true});
+    const w = await fh.createWritable();
+    await w.write(JSON.stringify(state, null, 2));
+    await w.close();
+    if(!silent) toast("Shranjeno v " + FILE_NAME);
+    storePillUpdate();
+    return true;
+  }catch(e){ if(!silent) toast("Shranjevanje ni uspelo: " + e.message); return false; }
+}
+async function pickFolder(){
+  if(!window.showDirectoryPicker){ toast("Brskalnik ne podpira izbire mape. Uporabite Izvoz/Uvoz JSON."); return; }
+  try{
+    const h = await window.showDirectoryPicker({mode:"readwrite", id:"aicompliance"});
+    dirHandle = h; await kvSet("dir", h);
+    // če datoteka že obstaja, ponudi nalaganje
+    let existing=null;
+    try{ const fh=await h.getFileHandle(FILE_NAME); const f=await fh.getFile(); existing=JSON.parse(await f.text()); }catch(e){}
+    if(existing && confirm("V tej mapi že obstaja " + FILE_NAME + ". Naložim te podatke (trenutni bodo zamenjani)?")){
+      state = migrate(existing); render(); toast("Podatki naloženi iz mape.");
+    } else { await writeToDisk(false); }
+    storePillUpdate(); render();
+  }catch(e){ /* uporabnik je preklical */ }
+}
+async function restoreFolder(){
+  const h = await kvGet("dir"); if(!h) return;
+  try{
+    const p = await h.queryPermission({mode:"readwrite"});
+    dirHandle = h;
+    if(p==="granted"){
+      try{ const fh=await h.getFileHandle(FILE_NAME); const f=await fh.getFile(); state=migrate(JSON.parse(await f.text())); }catch(e){}
+    }
+    storePillUpdate();
+  }catch(e){}
+}
+function storePillUpdate(){
+  const d=$("#storePill .dot"), t=$("#storeTxt");
+  if(dirHandle){ d.className="dot ok"; t.textContent="Mapa: " + (dirHandle.name||"izbrana") + " / " + FILE_NAME; }
+  else { d.className="dot off"; t.textContent="Shramba: brskalnik (mapa ni izbrana)"; }
+}
+function migrate(obj){
+  const base = seedEmpty();
+  const s = Object.assign(base, obj);
+  s.settings = Object.assign(base.settings, obj.settings||{});
+  s.settings.ai = Object.assign(base.settings.ai, (obj.settings&&obj.settings.ai)||{});
+  s.settings.match = Object.assign(base.settings.match, (obj.settings&&obj.settings.match)||{});
+  ["owners","regulations","requirements","processes","policies","tasks","log"].forEach(k=>{ if(!Array.isArray(s[k])) s[k]=[]; });
+  s.requirements.forEach(r=>{ r.linked=r.linked||[]; r.excluded=r.excluded||[]; r.tags=r.tags||[]; });
+  return s;
+}
+function seedEmpty(){
+  return {meta:{version:APP_VERSION,org:"",updated:new Date().toISOString()},
+    settings:{ai:{enabled:false,mode:"cloudflare",accountId:"",token:"",model:"@cf/meta/llama-3.1-8b-instruct",endpoint:""},match:{threshold:2,auto:true}},
+    owners:[],regulations:[],requirements:[],processes:[],policies:[],tasks:[],log:[]};
+}
+
+/* ---------- ujemanje zahteva → procesi ---------- */
+const STOP = new Set(("in ali ter kot pri pri se za na od do je so bo bodo mora morajo morate lahko ki kar tudi vseh vsak vsaka tem ta te to teh svoj svojih druge drugih med brez glede zaradi skladu vsebovati vključno vključuje ravni predpisanih ter naj").split(" "));
+function tokens(s){
+  return String(s||"").toLowerCase()
+    .replace(/[^\wčšžćđ\s]/g," ")
+    .split(/\s+/).filter(w=>w.length>3 && !STOP.has(w))
+    .map(w=>w.slice(0, Math.max(5, w.length-2))); // grob "stemming" za slovenske končnice
+}
+function tagSet(arr){ return new Set((arr||[]).map(t=>String(t).toLowerCase().trim())); }
+function matchScore(req, prc){
+  let sc = 0; const why = [];
+  const rt = tagSet(req.tags), pt = tagSet(prc.tags);
+  rt.forEach(t=>{ if(pt.has(t)){ sc += 3; why.push(t); } });
+  const rtok = new Set(tokens(req.title + " " + req.description));
+  const ptok = new Set(tokens(prc.name + " " + prc.description + " " + (prc.systems||"")));
+  let overlap = 0; rtok.forEach(t=>{ if(ptok.has(t)) overlap++; });
+  sc += Math.min(overlap, 4);
+  if(overlap && why.length===0) why.push("besedilno ujemanje");
+  const reg = state.regulations.find(r=>r.id===req.regId);
+  if(reg && (reg.sector||[]).includes("splošno")) sc += 0.5;
+  if(prc.criticality==="kriticno") sc += 0.5;
+  return {score: sc, why};
+}
+function impact(req){
+  const thr = Number(state.settings.match.threshold)||2;
+  const out = [];
+  state.processes.forEach(p=>{
+    if((req.excluded||[]).includes(p.id)) return;
+    const manual = (req.linked||[]).includes(p.id);
+    const m = matchScore(req,p);
+    if(manual || m.score >= thr) out.push({p, score: manual ? Math.max(m.score, thr) : m.score, why:m.why, manual});
+  });
+  return out.sort((a,b)=>b.score-a.score);
+}
+function coverage(req){
+  // pokritost z internimi politikami prek ujemanja oznak
+  const rt = tagSet(req.tags);
+  return state.policies.filter(p=>{ const pt=tagSet(p.tags); let n=0; rt.forEach(t=>{ if(pt.has(t)) n++; }); return n>=1; });
+}
+function complianceScore(){
+  const rel = state.requirements.filter(r=>STATUSI[r.status] && STATUSI[r.status].score!==null);
+  if(!rel.length) return 0;
+  return Math.round(rel.reduce((a,r)=>a+STATUSI[r.status].score,0)/rel.length);
+}
+function ownerName(id){ const o=state.owners.find(x=>x.id===id); return o?o.name:"ni določena"; }
+
+/* ---------- navigacija ---------- */
+const PAGES = [
+  {id:"dash",  l:"Nadzorna plošča"},
+  {id:"reqs",  l:"Zahteve", count:()=>state.requirements.length},
+  {id:"regs",  l:"Regulativa", count:()=>state.regulations.length},
+  {id:"pols",  l:"Interne politike", count:()=>state.policies.length},
+  {id:"procs", l:"Procesi", count:()=>state.processes.length},
+  {id:"tasks", l:"Naloge", count:()=>state.tasks.filter(t=>t.status!=="koncana").length},
+  {id:"matrix",l:"Matrika vplivov"},
+  {id:"ai",    l:"Analiza besedila"},
+  {id:"report",l:"Poročila"},
+  {id:"setup", l:"Nastavitve"}
+];
+let page = "dash";
+function renderNav(){
+  const n=$("#nav");
+  n.innerHTML = '<div class="grp">Pregled</div>' + PAGES.map((p,i)=>{
+    const c = p.count? '<span class="cnt num">'+p.count()+'</span>' : "";
+    const grp = (p.id==="matrix")? '<div class="grp">Analiza</div>' : (p.id==="report")? '<div class="grp">Izhod</div>' : (p.id==="reqs")? '<div class="grp">Register</div>' : "";
+    return grp + '<button data-p="'+p.id+'" class="'+(page===p.id?"on":"")+'">'+esc(p.l)+c+'</button>';
+  }).join("");
+  n.querySelectorAll("button").forEach(b=> b.onclick=()=>{ page=b.dataset.p; render(); window.scrollTo(0,0); });
+}
+
+/* ============================================================
+   POGLEDI
+   ============================================================ */
+function render(){ renderNav(); $("#view").innerHTML = VIEWS[page](); bind(); aiPillUpdate(); storePillUpdate(); }
+
+const VIEWS = {};
+
+/* --- Nadzorna plošča --- */
+VIEWS.dash = function(){
+  const reqs = state.requirements.slice();
+  const opozorila = reqs
+    .filter(r=> r.status!=="nerelevantno")
+    .map(r=>({r, imp:impact(r), d:daysUntil(r.due)}))
+    .filter(x=> x.r.status==="nova" || x.r.status==="neskladno" || (x.d!==null && x.d<=90))
+    .sort((a,b)=>{
+      const rank = s => s.r.status==="neskladno"?0 : s.r.status==="nova"?1 : 2;
+      if(rank(a)!==rank(b)) return rank(a)-rank(b);
+      return (a.d===null?9999:a.d)-(b.d===null?9999:b.d);
+    });
+
+  const zapadle = reqs.filter(r=>{const d=daysUntil(r.due); return d!==null && d<0 && r.status!=="skladno" && r.status!=="nerelevantno";}).length;
+  const kmalu = reqs.filter(r=>{const d=daysUntil(r.due); return d!==null && d>=0 && d<=30 && r.status!=="skladno";}).length;
+  const nove = reqs.filter(r=>r.status==="nova").length;
+  const sc = complianceScore();
+
+  const nal = state.tasks.filter(t=>t.status!=="koncana").sort((a,b)=>(a.due||"9").localeCompare(b.due||"9"));
+
+  return `
+  <h1>Nadzorna plošča</h1>
+  <p class="sub">Kaj se je spremenilo v regulativi, na koliko vaših procesov to vpliva, kdo je odgovoren in koliko časa je še na voljo.</p>
+
+  <div class="kpis">
+    <div class="kpi"><b class="num">${reqs.length}</b><span>zahtev v registru</span></div>
+    <div class="kpi"><b class="num" style="color:var(--amber)">${nove}</b><span>novih / nepregledanih</span></div>
+    <div class="kpi"><b class="num" style="color:var(--brick)">${zapadle}</b><span>zapadlih rokov</span></div>
+    <div class="kpi"><b class="num">${kmalu}</b><span>rok v 30 dneh</span></div>
+    <div class="kpi"><b class="num">${sc}%</b><span>ocena skladnosti</span></div>
+    <div class="kpi"><b class="num">${state.processes.length}</b><span>procesov v obsegu</span></div>
+  </div>
+
+  <h2>Opozorila</h2>
+  ${opozorila.length ? opozorila.slice(0,12).map(x=>alertHTML(x)).join("") : '<div class="empty">Ni odprtih opozoril. Dodajte zahtevo ali spustite besedilo predpisa v Analizo besedila.</div>'}
+
+  <div class="split" style="margin-top:26px">
+    <div>
+      <h2 style="margin-top:0">Naloge z najbližjim rokom</h2>
+      ${nal.length? '<div class="list">'+nal.slice(0,8).map(t=>{
+        const d=daysUntil(t.due);
+        return '<div class="it"><div class="g"><div>'+esc(t.title)+'</div><small>'+esc(ownerName(t.ownerId))+' · '+fmtDate(t.due)+'</small></div>'+
+        '<span class="badge '+(d!==null&&d<0?"b-brick":NALOGA_ST[t.status].c)+'">'+(d!==null&&d<0?"zamuda":NALOGA_ST[t.status].l)+'</span></div>';
+      }).join("")+'</div>' : '<div class="empty">Ni odprtih nalog.</div>'}
+    </div>
+    <div>
+      <h2 style="margin-top:0">Pokritost s politikami</h2>
+      <div class="card">
+        ${state.requirements.length? state.requirements.slice(0,6).map(r=>{
+          const c=coverage(r).length;
+          return '<div style="margin-bottom:10px"><div class="row" style="justify-content:space-between"><span class="mono">'+esc(r.code)+'</span><small style="color:var(--muted)">'+c+' politik</small></div><div class="bar"><i style="width:'+Math.min(100,c*33)+'%"></i></div></div>';
+        }).join("") : '<div class="hint">Ni podatkov.</div>'}
+        <div class="hint" style="margin-top:8px">Zahteve brez ustrezne interne politike so najpogostejši vir ugotovitev na nadzoru.</div>
+      </div>
+    </div>
+  </div>`;
+};
+function alertHTML(x){
+  const r=x.r, n=x.imp.length, d=x.d;
+  const cls = (d!==null && d<0) ? "late" : (d!==null && d<=30) ? "soon" : (r.status==="nova"?"soon":"calm");
+  const ikona = (d!==null&&d<0) ? "⛔" : "⚠️";
+  const uvod = r.status==="nova" ? "Nova zahteva" : r.status==="neskladno" ? "Ugotovljena neskladnost" : "Zahteva v obravnavi";
+  const reg = state.regulations.find(g=>g.id===r.regId);
+  return `<div class="alert ${cls}">
+    <div class="lead">
+      <p>${ikona} <strong>${esc(uvod)}</strong> vpliva na <span class="impact">${n}</span> ${n===1?"vaš proces":"vaših procesov"}.</p>
+      <div class="meta">${esc(r.code)} · ${esc(r.title)}${reg?" · "+esc(reg.code):""}</div>
+      <div class="meta">Odgovorna oseba: <strong>${esc(ownerName(r.ownerId))}</strong> · Rok: <strong>${esc(rokLabel(r.due))}</strong>${r.due?" ("+fmtDate(r.due)+")":""}</div>
+    </div>
+    <div class="row">
+      <span class="badge ${TVEGANJA[r.risk]?TVEGANJA[r.risk].c:"b-grey"}">${TVEGANJA[r.risk]?TVEGANJA[r.risk].l:"—"}</span>
+      <button class="btn sm" data-req="${r.id}">Odpri</button>
+    </div>
+  </div>`;
+}
+
+/* --- Zahteve --- */
+let reqFilter = {q:"", status:"", risk:"", reg:""};
+VIEWS.reqs = function(){
+  const rows = state.requirements.filter(r=>{
+    if(reqFilter.status && r.status!==reqFilter.status) return false;
+    if(reqFilter.risk && r.risk!==reqFilter.risk) return false;
+    if(reqFilter.reg && r.regId!==reqFilter.reg) return false;
+    if(reqFilter.q){ const q=reqFilter.q.toLowerCase();
+      if(!((r.code+" "+r.title+" "+r.description+" "+(r.tags||[]).join(" ")).toLowerCase().includes(q))) return false; }
+    return true;
+  }).sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));
+
+  return `
+  <h1>Zahteve</h1>
+  <p class="sub">Posamezne obveznosti, izluščene iz predpisov. Vsaka ima nosilca, rok, stanje in seznam procesov, na katere vpliva.</p>
+  <div class="toolbar">
+    <input type="text" id="fq" placeholder="Iskanje po besedilu ali oznaki" value="${esc(reqFilter.q)}">
+    <select id="fstat"><option value="">Vsa stanja</option>${Object.entries(STATUSI).map(([k,v])=>'<option value="'+k+'"'+(reqFilter.status===k?" selected":"")+'>'+v.l+'</option>').join("")}</select>
+    <select id="frisk"><option value="">Vsa tveganja</option>${Object.entries(TVEGANJA).map(([k,v])=>'<option value="'+k+'"'+(reqFilter.risk===k?" selected":"")+'>'+v.l+'</option>').join("")}</select>
+    <select id="freg"><option value="">Vsi predpisi</option>${state.regulations.map(g=>'<option value="'+g.id+'"'+(reqFilter.reg===g.id?" selected":"")+'>'+esc(g.code)+'</option>').join("")}</select>
+    <div style="flex:1"></div>
+    <button class="btn primary" id="addReq">Dodaj zahtevo</button>
+  </div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Oznaka</th><th>Zahteva</th><th>Predpis</th><th>Tveganje</th><th>Vpliv</th><th>Nosilec</th><th>Rok</th><th>Stanje</th></tr></thead>
+    <tbody>${rows.map(r=>{
+      const reg=state.regulations.find(g=>g.id===r.regId);
+      const d=daysUntil(r.due);
+      const n=impact(r).length;
+      return `<tr class="clickable" data-req="${r.id}">
+        <td class="mono">${esc(r.code)}</td>
+        <td><div>${esc(r.title)}</div><div>${(r.tags||[]).slice(0,4).map(t=>'<span class="tag">'+esc(t)+'</span>').join("")}</div></td>
+        <td>${reg?esc(reg.code):"—"}</td>
+        <td><span class="badge ${TVEGANJA[r.risk]?TVEGANJA[r.risk].c:"b-grey"}">${TVEGANJA[r.risk]?TVEGANJA[r.risk].l:"—"}</span></td>
+        <td class="num">${n}</td>
+        <td>${esc(ownerName(r.ownerId))}</td>
+        <td class="num" style="${d!==null&&d<0?"color:var(--brick)":""}">${r.due?fmtDate(r.due):"—"}<div style="font-size:11px;color:var(--muted)">${r.due?rokLabel(r.due):""}</div></td>
+        <td><span class="badge ${STATUSI[r.status].c}">${STATUSI[r.status].l}</span></td>
+      </tr>`;
+    }).join("") || '<tr><td colspan="8" style="color:var(--muted);padding:22px">Ni zadetkov.</td></tr>'}</tbody>
+  </table></div>`;
+};
+
+/* --- Regulativa --- */
+VIEWS.regs = function(){
+  return `
+  <h1>Regulativa</h1>
+  <p class="sub">Viri obveznosti: zakoni, uredbe, direktive, smernice nadzornikov in standardi.</p>
+  <div class="toolbar"><div style="flex:1"></div><button class="btn primary" id="addReg">Dodaj predpis</button></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Oznaka</th><th>Naziv</th><th>Vrsta</th><th>Izdajatelj</th><th>Sektor</th><th>Velja od</th><th>Zahteve</th><th></th></tr></thead>
+    <tbody>${state.regulations.map(g=>`<tr>
+      <td class="mono">${esc(g.code)}</td>
+      <td>${esc(g.title)}${g.url?' <a href="'+esc(g.url)+'" target="_blank" rel="noopener">vir</a>':""}</td>
+      <td>${esc(g.type)}</td><td>${esc(g.authority||"—")}</td>
+      <td>${(g.sector||[]).map(s=>'<span class="tag">'+esc(s)+'</span>').join("")}</td>
+      <td class="num">${fmtDate(g.effective)}</td>
+      <td class="num">${state.requirements.filter(r=>r.regId===g.id).length}</td>
+      <td class="row"><button class="btn sm" data-edit="regulations" data-id="${g.id}">Uredi</button><button class="btn sm danger" data-del="regulations" data-id="${g.id}">Izbriši</button></td>
+    </tr>`).join("") || '<tr><td colspan="8" style="padding:22px;color:var(--muted)">Register je prazen.</td></tr>'}</tbody>
+  </table></div>`;
+};
+
+/* --- Politike --- */
+VIEWS.pols = function(){
+  return `
+  <h1>Interne politike</h1>
+  <p class="sub">Vaši dokumenti, s katerimi dokazujete izpolnjevanje zahtev. Rdeč datum pregleda pomeni, da je politika zastarela.</p>
+  <div class="toolbar"><div style="flex:1"></div><button class="btn primary" id="addPol">Dodaj politiko</button></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Oznaka</th><th>Naziv</th><th>Skrbnik</th><th>Različica</th><th>Zadnji pregled</th><th>Naslednji pregled</th><th>Področja</th><th>Stanje</th><th></th></tr></thead>
+    <tbody>${state.policies.map(p=>{
+      const d=daysUntil(p.nextReview);
+      return `<tr>
+      <td class="mono">${esc(p.code)}</td><td>${esc(p.title)}</td><td>${esc(p.owner||"—")}</td>
+      <td class="num">${esc(p.version||"—")}</td><td class="num">${fmtDate(p.lastReview)}</td>
+      <td class="num" style="${d!==null&&d<0?"color:var(--brick)":""}">${fmtDate(p.nextReview)}</td>
+      <td>${(p.tags||[]).map(t=>'<span class="tag">'+esc(t)+'</span>').join("")}</td>
+      <td><span class="badge ${p.status==="veljavna"?"b-sage":p.status==="osnutek"?"b-amber":"b-blue"}">${esc(p.status||"—")}</span></td>
+      <td class="row"><button class="btn sm" data-edit="policies" data-id="${p.id}">Uredi</button><button class="btn sm danger" data-del="policies" data-id="${p.id}">Izbriši</button></td>
+    </tr>`;}).join("") || '<tr><td colspan="9" style="padding:22px;color:var(--muted)">Ni politik.</td></tr>'}</tbody>
+  </table></div>`;
+};
+
+/* --- Procesi --- */
+VIEWS.procs = function(){
+  return `
+  <h1>Procesi</h1>
+  <p class="sub">Popis procesov podjetja. Bolje kot so opisani in označeni, natančneje aplikacija izračuna vpliv nove zahteve.</p>
+  <div class="toolbar"><div style="flex:1"></div><button class="btn primary" id="addProc">Dodaj proces</button></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Oznaka</th><th>Proces</th><th>Oddelek</th><th>Kritičnost</th><th>Področja</th><th>Sistemi</th><th>Zadetkov</th><th></th></tr></thead>
+    <tbody>${state.processes.map(p=>{
+      const hits = state.requirements.filter(r=>impact(r).some(i=>i.p.id===p.id)).length;
+      return `<tr>
+      <td class="mono">${esc(p.code)}</td>
+      <td><div>${esc(p.name)}</div><div style="color:var(--muted);font-size:12px">${esc(p.description||"")}</div></td>
+      <td>${esc(p.department||"—")}</td>
+      <td><span class="badge ${TVEGANJA[p.criticality]?TVEGANJA[p.criticality].c:"b-grey"}">${TVEGANJA[p.criticality]?TVEGANJA[p.criticality].l:"—"}</span></td>
+      <td>${(p.tags||[]).map(t=>'<span class="tag">'+esc(t)+'</span>').join("")}</td>
+      <td>${esc(p.systems||"—")}</td>
+      <td class="num">${hits}</td>
+      <td class="row"><button class="btn sm" data-edit="processes" data-id="${p.id}">Uredi</button><button class="btn sm danger" data-del="processes" data-id="${p.id}">Izbriši</button></td>
+    </tr>`;}).join("") || '<tr><td colspan="8" style="padding:22px;color:var(--muted)">Ni procesov.</td></tr>'}</tbody>
+  </table></div>`;
+};
+
+/* --- Naloge --- */
+VIEWS.tasks = function(){
+  const t = state.tasks.slice().sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));
+  return `
+  <h1>Naloge</h1>
+  <p class="sub">Konkretni koraki, s katerimi zaprete posamezno zahtevo.</p>
+  <div class="toolbar"><div style="flex:1"></div><button class="btn primary" id="addTask">Dodaj nalogo</button></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Naloga</th><th>Zahteva</th><th>Nosilec</th><th>Rok</th><th>Stanje</th><th></th></tr></thead>
+    <tbody>${t.map(x=>{
+      const r=state.requirements.find(q=>q.id===x.reqId); const d=daysUntil(x.due);
+      return `<tr>
+        <td>${esc(x.title)}${x.notes?'<div style="color:var(--muted);font-size:12px">'+esc(x.notes)+'</div>':""}</td>
+        <td class="mono">${r?esc(r.code):"—"}</td>
+        <td>${esc(ownerName(x.ownerId))}</td>
+        <td class="num" style="${d!==null&&d<0&&x.status!=="koncana"?"color:var(--brick)":""}">${fmtDate(x.due)}</td>
+        <td><span class="badge ${NALOGA_ST[x.status].c}">${NALOGA_ST[x.status].l}</span></td>
+        <td class="row">
+          <button class="btn sm" data-tnext="${x.id}">Naprej</button>
+          <button class="btn sm" data-edit="tasks" data-id="${x.id}">Uredi</button>
+          <button class="btn sm danger" data-del="tasks" data-id="${x.id}">Izbriši</button></td>
+      </tr>`;}).join("") || '<tr><td colspan="6" style="padding:22px;color:var(--muted)">Ni nalog.</td></tr>'}</tbody>
+  </table></div>`;
+};
+
+/* --- Matrika vplivov --- */
+VIEWS.matrix = function(){
+  const rs = state.requirements.filter(r=>r.status!=="nerelevantno");
+  const ps = state.processes;
+  return `
+  <h1>Matrika vplivov</h1>
+  <p class="sub">Presečišče pomeni, da zahteva vpliva na proces. Polna pika je ročno potrjena povezava, prazna je predlog izračuna.</p>
+  <div class="toolbar"><span class="hint">Prag ujemanja: ${esc(String(state.settings.match.threshold))} — spremenite ga v Nastavitvah.</span></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th style="min-width:150px">Zahteva \\ Proces</th>${ps.map(p=>'<th title="'+esc(p.name)+'" class="mono">'+esc(p.code)+'</th>').join("")}<th>Skupaj</th></tr></thead>
+    <tbody>${rs.map(r=>{
+      const imp=impact(r); const ids=new Set(imp.map(i=>i.p.id));
+      return '<tr><td class="mono clickable" data-req="'+r.id+'" title="'+esc(r.title)+'">'+esc(r.code)+'</td>'+
+        ps.map(p=>{
+          if(!ids.has(p.id)) return '<td style="color:var(--line)">·</td>';
+          const manual=(r.linked||[]).includes(p.id);
+          return '<td style="color:'+(manual?"var(--ink)":"var(--muted)")+'">'+(manual?"●":"○")+'</td>';
+        }).join("")+
+        '<td class="num"><strong>'+imp.length+'</strong></td></tr>';
+    }).join("")}</tbody>
+  </table></div>`;
+};
+
+/* --- Analiza besedila (deluje brez AI) --- */
+let aiText = "", aiOut = null;
+VIEWS.ai = function(){
+  const on = state.settings.ai.enabled;
+  return `
+  <h1>Analiza besedila predpisa</h1>
+  <p class="sub">Prilepite besedilo novega predpisa, okrožnice ali osnutka. Aplikacija iz njega izlušči obveznosti, jim predlaga področja in izračuna, na katere vaše procese vplivajo. Brez AI dela s slovničnimi pravili; z vklopljenim Cloudflare AI izluščke ubesedi bolje.</p>
+  <div class="card" style="margin-bottom:14px">
+    <label class="f"><span>Besedilo predpisa</span>
+      <textarea id="aiIn" style="min-height:190px" placeholder="Prilepite člene ali povzetek…">${esc(aiText)}</textarea></label>
+    <div class="row">
+      <button class="btn primary" id="aiRun">${on?"Analiziraj (AI)":"Analiziraj (lokalno)"}</button>
+      <button class="btn" id="aiLocal">Analiziraj brez AI</button>
+      <span class="hint">${on? "AI je vklopljen — če klic ne uspe, se samodejno uporabi lokalna analiza." : "AI je izklopljen. Lokalna analiza deluje takoj in brez povezave."}</span>
+    </div>
+  </div>
+  <div id="aiResult">${aiOut? aiOutHTML() : '<div class="empty">Rezultat analize se izpiše tukaj.</div>'}</div>`;
+};
+function aiOutHTML(){
+  return `<h2>Predlagane zahteve (${aiOut.length})</h2>` + aiOut.map((c,i)=>{
+    const tmp = {tags:c.tags, title:c.title, description:c.description, linked:[], excluded:[], regId:null};
+    const imp = impact(tmp);
+    return `<div class="card" style="margin-bottom:10px">
+      <div class="row" style="justify-content:space-between;align-items:flex-start">
+        <div style="flex:1;min-width:240px">
+          <strong>${esc(c.title)}</strong>
+          <div style="color:var(--muted);font-size:13px;margin:4px 0">${esc(c.description)}</div>
+          <div>${c.tags.map(t=>'<span class="tag">'+esc(t)+'</span>').join("")}</div>
+          <div style="margin-top:6px;font-size:13px">⚠️ Vpliva na <strong>${imp.length}</strong> procesov: ${imp.slice(0,5).map(x=>esc(x.p.code)).join(", ")||"—"}</div>
+        </div>
+        <button class="btn sm primary" data-adopt="${i}">Uvozi v register</button>
+      </div></div>`;
+  }).join("");
+}
+function localExtract(text){
+  const sents = String(text).replace(/\s+/g," ").split(/(?<=[.;])\s+/).filter(s=>s.length>40);
+  const modal = /(mora|morajo|morate|je dolžan|dolžni|zagotovi|zagotavlja|vzpostavi|prepove|ni dovoljeno|najkasneje|v roku|obvezn|se izvede|vodi se|poroča)/i;
+  const KEYS = {
+    "osebni podatki":/(osebn|posameznik|privolitev|obdelav|zasebnost)/i,
+    "incident":/(incident|kršitev varnosti|napad|motnj)/i,
+    "kibernetska varnost":/(kibernet|informacijsk(a|e) varnost|omrežj|dostop)/i,
+    "poročanje":/(poroč|obvest|prijav|uradu|agenciji|nadzornemu)/i,
+    "roki":/(rok|najkasneje|v roku|dnev|ur od)/i,
+    "umetna inteligenca":/(umetn(a|e) inteligenc|algoritem|model|avtomatiziran)/i,
+    "zunanje izvajanje":/(zunanj|izvajalec|dobavitelj|oblak|pogodb)/i,
+    "validacija":/(validacij|kvalifikacij|preverjanj|testiran)/i,
+    "dokumentacija":/(dokument|evidenc|zapis|register|sled)/i,
+    "usposabljanje":/(usposablj|izobražev|zaposlen)/i,
+    "pranje denarja":/(pranj(e|a) denarja|financiranj(e|a) terorizma|skrbni pregled)/i,
+    "nadzor":/(nadzor|kontrol|pregled|revizij)/i,
+    "tveganja":/(tveganj|ocen(a|o) tveganj)/i
+  };
+  const out = [];
+  sents.forEach(s=>{
+    if(!modal.test(s)) return;
+    const tags = Object.keys(KEYS).filter(k=>KEYS[k].test(s));
+    const words = s.trim().split(" ");
+    const title = (words.slice(0,11).join(" ") + (words.length>11?"…":"")).replace(/^[-–•\s]+/,"");
+    out.push({title: title.charAt(0).toUpperCase()+title.slice(1), description: s.trim(), tags: tags.length?tags:["splošno"]});
+  });
+  const seen=new Set();
+  return out.filter(c=>{ const k=c.description.slice(0,60); if(seen.has(k)) return false; seen.add(k); return true; }).slice(0,15);
+}
+async function aiRun(text){
+  const s = state.settings.ai;
+  const sys = "Si pravni analitik za skladnost poslovanja. Iz besedila predpisa izlušči posamezne obveznosti. Odgovori IZKLJUČNO z JSON poljem oblike "
+    + '[{"title":"kratek naslov obveznosti","description":"povzetek obveznosti v enem stavku","tags":["podrocje1","podrocje2"]}]'
+    + " brez uvoda, brez razlage in brez oznak za kodo. Piši v slovenščini.";
+  const url = s.endpoint ? s.endpoint : "https://api.cloudflare.com/client/v4/accounts/"+encodeURIComponent(s.accountId)+"/ai/run/"+s.model;
+  const headers = {"Content-Type":"application/json"};
+  if(s.token) headers["Authorization"] = "Bearer " + s.token;
+  const res = await fetch(url, {method:"POST", headers, body: JSON.stringify({
+    messages:[{role:"system",content:sys},{role:"user",content:String(text).slice(0,8000)}], max_tokens:1200
+  })});
+  if(!res.ok) throw new Error("HTTP " + res.status);
+  const data = await res.json();
+  let txt = (data && data.result && (data.result.response || data.result.output)) ||
+            (data && data.response) ||
+            (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
+  txt = String(txt).replace(/```json|```/g,"").trim();
+  const m = txt.match(/\[[\s\S]*\]/); if(m) txt = m[0];
+  const arr = JSON.parse(txt);
+  return arr.filter(x=>x&&x.title).map(x=>({title:String(x.title), description:String(x.description||x.title), tags:Array.isArray(x.tags)?x.tags.map(String):["splošno"]}));
+}
+
+/* --- Poročila --- */
+VIEWS.report = function(){
+  const sc=complianceScore();
+  const byReg = state.regulations.map(g=>{
+    const rs=state.requirements.filter(r=>r.regId===g.id);
+    const ok=rs.filter(r=>r.status==="skladno").length;
+    return {g, n:rs.length, ok, pct: rs.length? Math.round(ok/rs.length*100):0};
+  });
+  const late = state.requirements.filter(r=>{const d=daysUntil(r.due);return d!==null&&d<0&&r.status!=="skladno";});
+  return `
+  <h1>Poročila</h1>
+  <p class="sub">Pregled za vodstvo, revizijo ali nadzorni obisk. Za PDF uporabite tiskanje in shranjevanje v PDF.</p>
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">Natisni / shrani v PDF</button>
+    <button class="btn" id="csvReq">Izvozi zahteve (CSV)</button>
+    <button class="btn" id="csvImp">Izvozi matriko vplivov (CSV)</button>
+    <button class="btn" id="expJson">Izvozi vse (JSON)</button>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="row" style="justify-content:space-between"><h2 style="margin:0">Povzetek stanja</h2><span class="mono">${esc(new Date().toLocaleString("sl-SI"))}</span></div>
+    <p>Organizacija: <strong>${esc(state.meta.org||"—")}</strong>. V registru je ${state.requirements.length} zahtev iz ${state.regulations.length} predpisov, ki se dotikajo ${state.processes.length} procesov. Skupna ocena skladnosti znaša <strong>${sc}%</strong>. Zapadlih rokov: <strong>${late.length}</strong>.</p>
+  </div>
+  <h2>Skladnost po predpisih</h2>
+  <div class="tablewrap"><table><thead><tr><th>Predpis</th><th>Naziv</th><th>Zahtev</th><th>Skladnih</th><th>Delež</th></tr></thead>
+  <tbody>${byReg.map(x=>'<tr><td class="mono">'+esc(x.g.code)+'</td><td>'+esc(x.g.title)+'</td><td class="num">'+x.n+'</td><td class="num">'+x.ok+'</td><td><div class="bar" style="width:120px"><i style="width:'+x.pct+'%"></i></div><small>'+x.pct+'%</small></td></tr>').join("")}</tbody></table></div>
+  <h2>Zapadle obveznosti</h2>
+  ${late.length? '<div class="tablewrap"><table><thead><tr><th>Oznaka</th><th>Zahteva</th><th>Nosilec</th><th>Rok</th><th>Zamuda</th></tr></thead><tbody>'+
+    late.map(r=>'<tr><td class="mono">'+esc(r.code)+'</td><td>'+esc(r.title)+'</td><td>'+esc(ownerName(r.ownerId))+'</td><td class="num">'+fmtDate(r.due)+'</td><td class="num" style="color:var(--brick)">'+Math.abs(daysUntil(r.due))+' dni</td></tr>').join("")+
+    '</tbody></table></div>' : '<div class="empty">Ni zapadlih obveznosti.</div>'}
+  <h2>Dnevnik sprememb</h2>
+  <div class="list">${state.log.slice(-12).reverse().map(l=>'<div class="it"><div class="g">'+esc(l.what)+'<br><small>'+esc(new Date(l.ts).toLocaleString("sl-SI"))+'</small></div></div>').join("")||'<div class="it">Ni zapisov.</div>'}</div>`;
+};
+
+/* --- Nastavitve --- */
+VIEWS.setup = function(){
+  const a=state.settings.ai;
+  return `
+  <h1>Nastavitve</h1>
+  <p class="sub">Aplikacija je brezplačna in deluje lokalno. Podatki so shranjeni v eni JSON datoteki v mapi, ki jo izberete.</p>
+
+  <h2>Shranjevanje</h2>
+  <div class="card">
+    <div class="row" style="margin-bottom:10px">
+      <button class="btn primary" id="pickDir">Izberi mapo za shranjevanje</button>
+      <button class="btn" id="saveNow">Shrani zdaj</button>
+      <button class="btn" id="expJson2">Izvozi JSON</button>
+      <button class="btn" id="impJson">Uvozi JSON</button>
+      <input type="file" id="impFile" accept="application/json" style="display:none">
+    </div>
+    <div class="hint">Trenutno: <strong>${dirHandle? esc(dirHandle.name)+" / "+FILE_NAME : "mapa ni izbrana, podatki so le v brskalniku"}</strong>. Izbira mape deluje v Chromu in Edgeu; v Firefoxu in Safariju uporabite Izvoz in Uvoz JSON. Vsaka sprememba se shrani samodejno.</div>
+    <label class="f" style="margin-top:12px"><span>Naziv organizacije (za poročila)</span><input type="text" id="orgName" value="${esc(state.meta.org||"")}"></label>
+  </div>
+
+  <h2>Izračun vpliva</h2>
+  <div class="card">
+    <div class="grid2">
+      <label class="f"><span>Prag ujemanja (nižji = več predlaganih procesov)</span>
+        <input type="number" id="thr" min="1" max="8" step="0.5" value="${esc(String(state.settings.match.threshold))}"></label>
+      <div class="hint" style="margin-top:20px">Ujemanje se izračuna iz skupnih področij (oznak) ter besedilnega prekrivanja med zahtevo in opisom procesa. Ročno povezani procesi se vedno štejejo.</div>
+    </div>
+  </div>
+
+  <h2>Cloudflare AI (neobvezno)</h2>
+  <div class="card">
+    <label class="f"><span>Uporaba AI</span>
+      <select id="aiOn"><option value="0"${a.enabled?"":" selected"}>Izklopljen — vse dela lokalno</option><option value="1"${a.enabled?" selected":""}>Vklopljen</option></select></label>
+    <div class="grid2">
+      <label class="f"><span>Account ID</span><input type="text" id="aiAcc" value="${esc(a.accountId)}" placeholder="npr. 8f2c…"></label>
+      <label class="f"><span>API žeton</span><input type="password" id="aiTok" value="${esc(a.token)}" placeholder="Workers AI token"></label>
+      <label class="f"><span>Model</span><input type="text" id="aiModel" value="${esc(a.model)}"></label>
+      <label class="f"><span>Lasten endpoint (Worker ali AI Gateway)</span><input type="text" id="aiEp" value="${esc(a.endpoint)}" placeholder="https://moj-worker.workers.dev/ai"></label>
+    </div>
+    <div class="row"><button class="btn" id="aiTest">Preveri povezavo</button><span class="hint" id="aiTestOut"></span></div>
+    <div class="hint" style="margin-top:10px">Priporočeno: postavite majhen Cloudflare Worker, ki hrani žeton in kliče Workers AI. Tako žeton ni v datoteki, hkrati pa se izognete omejitvam CORS pri neposrednem klicu na api.cloudflare.com iz brskalnika. Če AI ni na voljo, aplikacija samodejno uporabi lokalno analizo — nobena funkcija se ne izgubi.</div>
+  </div>
+
+  <h2>Odgovorne osebe in oddelki</h2>
+  <div class="card">
+    <div class="list" style="margin-bottom:10px">${state.owners.map(o=>'<div class="it"><div class="g">'+esc(o.name)+'<br><small>'+esc(o.type)+' · '+esc(o.email||"—")+'</small></div><button class="btn sm danger" data-del="owners" data-id="'+o.id+'">Izbriši</button></div>').join("")||'<div class="it">Ni vnosov.</div>'}</div>
+    <button class="btn" id="addOwner">Dodaj odgovorno osebo</button>
+  </div>
+
+  <h2>Podatki</h2>
+  <div class="card row">
+    <button class="btn" id="loadDemo">Naloži demo podatke</button>
+    <button class="btn danger" id="wipe">Izprazni vse</button>
+  </div>`;
+};
+
+/* ============================================================
+   OBRAZCI (predal)
+   ============================================================ */
+const FORMS = {
+  regulations:{t:"Predpis", f:[
+    {k:"code",l:"Oznaka"},{k:"title",l:"Naziv"},
+    {k:"type",l:"Vrsta",type:"select",opts:VRSTE},
+    {k:"authority",l:"Izdajatelj / nadzornik"},
+    {k:"sector",l:"Sektorji",type:"multi",opts:SEKTORJI},
+    {k:"effective",l:"Velja od",type:"date"},{k:"url",l:"Povezava na vir"},
+    {k:"notes",l:"Opombe",type:"textarea"}]},
+  processes:{t:"Proces", f:[
+    {k:"code",l:"Oznaka"},{k:"name",l:"Naziv procesa"},{k:"department",l:"Oddelek"},
+    {k:"criticality",l:"Kritičnost",type:"select",opts:Object.keys(TVEGANJA),labels:TVEGANJA},
+    {k:"tags",l:"Področja (ločena z vejico)",type:"tags"},
+    {k:"systems",l:"Sistemi / aplikacije"},
+    {k:"description",l:"Opis",type:"textarea"}]},
+  policies:{t:"Politika", f:[
+    {k:"code",l:"Oznaka"},{k:"title",l:"Naziv"},{k:"owner",l:"Skrbnik"},{k:"version",l:"Različica"},
+    {k:"lastReview",l:"Zadnji pregled",type:"date"},{k:"nextReview",l:"Naslednji pregled",type:"date"},
+    {k:"tags",l:"Področja (ločena z vejico)",type:"tags"},
+    {k:"status",l:"Stanje",type:"select",opts:["veljavna","v prenovi","osnutek","razveljavljena"]}]},
+  tasks:{t:"Naloga", f:[
+    {k:"title",l:"Naslov"},
+    {k:"reqId",l:"Zahteva",type:"ref",ref:"requirements",label:r=>r.code+" — "+r.title},
+    {k:"ownerId",l:"Nosilec",type:"ref",ref:"owners",label:o=>o.name},
+    {k:"due",l:"Rok",type:"date"},
+    {k:"status",l:"Stanje",type:"select",opts:Object.keys(NALOGA_ST),labels:NALOGA_ST},
+    {k:"notes",l:"Opombe",type:"textarea"}]},
+  owners:{t:"Odgovorna oseba", f:[
+    {k:"name",l:"Naziv (oddelek ali oseba)"},
+    {k:"type",l:"Vrsta",type:"select",opts:["oddelek","oseba"]},
+    {k:"email",l:"E-pošta"}]},
+  requirements:{t:"Zahteva", f:[
+    {k:"code",l:"Oznaka"},{k:"title",l:"Naslov zahteve"},
+    {k:"regId",l:"Predpis",type:"ref",ref:"regulations",label:g=>g.code+" — "+g.title},
+    {k:"description",l:"Besedilo obveznosti",type:"textarea"},
+    {k:"tags",l:"Področja (ločena z vejico)",type:"tags"},
+    {k:"risk",l:"Tveganje",type:"select",opts:Object.keys(TVEGANJA),labels:TVEGANJA},
+    {k:"ownerId",l:"Odgovorna oseba",type:"ref",ref:"owners",label:o=>o.name},
+    {k:"due",l:"Rok izpolnitve",type:"date"},
+    {k:"status",l:"Stanje",type:"select",opts:Object.keys(STATUSI),labels:STATUSI},
+    {k:"evidence",l:"Dokazila / sklici",type:"textarea"}]}
+};
+function openDrawer(title, html){
+  $("#drawerTitle").textContent = title;
+  $("#drawerBody").innerHTML = html;
+  $("#drawer").classList.add("on"); $("#drawer").setAttribute("aria-hidden","false");
+  $("#scrim").classList.add("on");
+}
+function closeDrawer(){ $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); $("#drawer").setAttribute("aria-hidden","true"); }
+
+function editForm(coll, id){
+  const cfg = FORMS[coll];
+  const rec = id ? state[coll].find(x=>x.id===id) : {};
+  const html = cfg.f.map(f=>{
+    const v = rec[f.k];
+    if(f.type==="textarea") return `<label class="f"><span>${esc(f.l)}</span><textarea data-k="${f.k}">${esc(v||"")}</textarea></label>`;
+    if(f.type==="select") return `<label class="f"><span>${esc(f.l)}</span><select data-k="${f.k}">${f.opts.map(o=>'<option value="'+esc(o)+'"'+(v===o?" selected":"")+'>'+esc(f.labels?(f.labels[o]?f.labels[o].l:o):o)+'</option>').join("")}</select></label>`;
+    if(f.type==="ref") return `<label class="f"><span>${esc(f.l)}</span><select data-k="${f.k}"><option value="">—</option>${state[f.ref].map(o=>'<option value="'+o.id+'"'+(v===o.id?" selected":"")+'>'+esc(f.label(o))+'</option>').join("")}</select></label>`;
+    if(f.type==="multi") return `<label class="f"><span>${esc(f.l)}</span><select data-k="${f.k}" data-multi="1" multiple size="4">${f.opts.map(o=>'<option value="'+esc(o)+'"'+((v||[]).includes(o)?" selected":"")+'>'+esc(o)+'</option>').join("")}</select></label>`;
+    if(f.type==="tags") return `<label class="f"><span>${esc(f.l)}</span><input type="text" data-k="${f.k}" data-tags="1" value="${esc((v||[]).join(", "))}"></label>`;
+    if(f.type==="date") return `<label class="f"><span>${esc(f.l)}</span><input type="date" data-k="${f.k}" value="${esc(v||"")}"></label>`;
+    return `<label class="f"><span>${esc(f.l)}</span><input type="text" data-k="${f.k}" value="${esc(v||"")}"></label>`;
+  }).join("");
+  openDrawer((id?"Uredi: ":"Nov vnos: ")+cfg.t, `<form id="editForm">${html}<div class="row"><button type="button" class="btn primary" id="formSave">Shrani</button><button type="button" class="btn" id="formCancel">Prekliči</button></div></form>`);
+  $("#formCancel").onclick = closeDrawer;
+  $("#formSave").onclick = ()=>{
+    const obj = id ? rec : {id: uid(coll.slice(0,3))};
+    $("#editForm").querySelectorAll("[data-k]").forEach(el=>{
+      const k = el.dataset.k;
+      if(el.dataset.multi) obj[k] = Array.from(el.selectedOptions).map(o=>o.value);
+      else if(el.dataset.tags) obj[k] = el.value.split(",").map(s=>s.trim()).filter(Boolean);
+      else obj[k] = el.value;
+    });
+    if(coll==="requirements"){ obj.linked=obj.linked||[]; obj.excluded=obj.excluded||[]; obj.created=obj.created||todayISO(); if(!obj.status) obj.status="nova"; }
+    if(!id) state[coll].push(obj);
+    logIt((id?"Urejeno: ":"Dodano: ")+cfg.t+" "+(obj.code||obj.title||obj.name||""));
+    markDirty(); closeDrawer(); render(); toast("Shranjeno.");
+  };
+}
+function logIt(what){ state.log.push({ts:new Date().toISOString(), what}); if(state.log.length>500) state.log=state.log.slice(-500); }
+
+function reqDetail(id){
+  const r = state.requirements.find(x=>x.id===id); if(!r) return;
+  const reg = state.regulations.find(g=>g.id===r.regId);
+  const imp = impact(r);
+  const cov = coverage(r);
+  const tsk = state.tasks.filter(t=>t.reqId===r.id);
+  const d = daysUntil(r.due);
+  openDrawer(r.code, `
+    <div class="alert ${d!==null&&d<0?"late":"soon"}" style="margin-bottom:14px">
+      <div class="lead"><p>⚠️ Ta zahteva vpliva na <span class="impact">${imp.length}</span> vaših procesov.</p>
+      <div class="meta">Odgovorna oseba: <strong>${esc(ownerName(r.ownerId))}</strong> · Rok: <strong>${esc(rokLabel(r.due))}</strong></div></div>
+    </div>
+    <h2 style="margin-top:0">${esc(r.title)}</h2>
+    <p style="max-width:70ch">${esc(r.description||"")}</p>
+    <dl class="kv">
+      <dt>Predpis</dt><dd>${reg?esc(reg.code+" — "+reg.title):"—"}</dd>
+      <dt>Stanje</dt><dd><span class="badge ${STATUSI[r.status].c}">${STATUSI[r.status].l}</span></dd>
+      <dt>Tveganje</dt><dd><span class="badge ${TVEGANJA[r.risk]?TVEGANJA[r.risk].c:"b-grey"}">${TVEGANJA[r.risk]?TVEGANJA[r.risk].l:"—"}</span></dd>
+      <dt>Rok</dt><dd>${r.due?fmtDate(r.due):"—"}</dd>
+      <dt>Področja</dt><dd>${(r.tags||[]).map(t=>'<span class="tag">'+esc(t)+'</span>').join("")||"—"}</dd>
+      <dt>Dokazila</dt><dd>${esc(r.evidence||"—")}</dd>
+    </dl>
+    <div class="row" style="margin-bottom:18px">
+      <select id="rqStatus">${Object.entries(STATUSI).map(([k,v])=>'<option value="'+k+'"'+(r.status===k?" selected":"")+'>'+v.l+'</option>').join("")}</select>
+      <button class="btn sm" id="rqEdit">Uredi</button>
+      <button class="btn sm" id="rqTask">Dodaj nalogo</button>
+      <button class="btn sm danger" id="rqDel">Izbriši</button>
+    </div>
+
+    <h2>Vpliv na procese (${imp.length})</h2>
+    <div class="list">${imp.map(x=>`<div class="it">
+      <div class="g"><div>${esc(x.p.code)} · ${esc(x.p.name)}</div>
+      <small>${esc(x.p.department||"")} · ujemanje ${x.score.toFixed(1)}${x.why.length?" · "+esc(x.why.slice(0,3).join(", ")):""}${x.manual?" · ročno potrjeno":""}</small></div>
+      <button class="btn sm" data-toglink="${x.p.id}">${x.manual?"Odstrani potrditev":"Potrdi"}</button>
+      <button class="btn sm" data-exclude="${x.p.id}">Izloči</button>
+    </div>`).join("")||'<div class="it">Ni zadetkov. Znižajte prag v Nastavitvah ali dopolnite opise procesov.</div>'}</div>
+
+    ${(r.excluded||[]).length? '<div class="hint" style="margin-top:8px">Izločeni procesi: '+r.excluded.map(pid=>{const p=state.processes.find(q=>q.id===pid);return p?'<span class="tag">'+esc(p.code)+' <a href="#" data-unexclude="'+pid+'">vrni</a></span>':"";}).join("")+'</div>':""}
+
+    <h2>Interne politike, ki to pokrivajo (${cov.length})</h2>
+    <div class="list">${cov.map(p=>'<div class="it"><div class="g">'+esc(p.code)+' · '+esc(p.title)+'<br><small>skrbnik '+esc(p.owner||"—")+' · različica '+esc(p.version||"—")+'</small></div><span class="badge '+(p.status==="veljavna"?"b-sage":"b-amber")+'">'+esc(p.status||"")+'</span></div>').join("")||'<div class="it" style="color:var(--brick)">Nobena obstoječa politika ne pokriva te zahteve — vrzel.</div>'}</div>
+
+    <h2>Naloge (${tsk.length})</h2>
+    <div class="list">${tsk.map(t=>'<div class="it"><div class="g">'+esc(t.title)+'<br><small>'+esc(ownerName(t.ownerId))+' · '+fmtDate(t.due)+'</small></div><span class="badge '+NALOGA_ST[t.status].c+'">'+NALOGA_ST[t.status].l+'</span></div>').join("")||'<div class="it">Ni nalog.</div>'}</div>
+  `);
+  $("#rqStatus").onchange = e=>{ r.status=e.target.value; logIt("Sprememba stanja zahteve "+r.code+" → "+STATUSI[r.status].l); markDirty(); reqDetail(id); render(); };
+  $("#rqEdit").onclick = ()=> editForm("requirements", r.id);
+  $("#rqDel").onclick = ()=>{ if(confirm("Izbrišem zahtevo "+r.code+"?")){ state.requirements=state.requirements.filter(x=>x.id!==r.id); logIt("Izbrisana zahteva "+r.code); markDirty(); closeDrawer(); render(); } };
+  $("#rqTask").onclick = ()=>{ const t={id:uid("tsk"),reqId:r.id,title:"",ownerId:r.ownerId,due:r.due,status:"odprta",notes:""}; state.tasks.push(t); markDirty(); editForm("tasks", t.id); };
+  $("#drawerBody").querySelectorAll("[data-toglink]").forEach(b=> b.onclick=()=>{
+    const pid=b.dataset.toglink; r.linked=r.linked||[];
+    r.linked = r.linked.includes(pid) ? r.linked.filter(x=>x!==pid) : r.linked.concat(pid);
+    markDirty(); reqDetail(id);
+  });
+  $("#drawerBody").querySelectorAll("[data-exclude]").forEach(b=> b.onclick=()=>{
+    const pid=b.dataset.exclude; r.excluded=(r.excluded||[]).concat(pid); r.linked=(r.linked||[]).filter(x=>x!==pid);
+    markDirty(); reqDetail(id); render();
+  });
+  $("#drawerBody").querySelectorAll("[data-unexclude]").forEach(a=> a.onclick=(e)=>{
+    e.preventDefault(); r.excluded=(r.excluded||[]).filter(x=>x!==a.dataset.unexclude); markDirty(); reqDetail(id); render();
+  });
+}
+
+/* ============================================================
+   VEZAVA DOGODKOV
+   ============================================================ */
+function bind(){
+  const v = $("#view");
+  v.querySelectorAll("[data-req]").forEach(el=> el.onclick = (e)=>{ e.stopPropagation(); reqDetail(el.dataset.req); });
+  v.querySelectorAll("[data-edit]").forEach(b=> b.onclick=(e)=>{ e.stopPropagation(); editForm(b.dataset.edit, b.dataset.id); });
+  v.querySelectorAll("[data-del]").forEach(b=> b.onclick=(e)=>{
+    e.stopPropagation(); const c=b.dataset.del;
+    if(!confirm("Res izbrišem ta vnos?")) return;
+    state[c]=state[c].filter(x=>x.id!==b.dataset.id); logIt("Izbrisan vnos iz: "+c); markDirty(); render();
+  });
+  v.querySelectorAll("[data-tnext]").forEach(b=> b.onclick=()=>{
+    const t=state.tasks.find(x=>x.id===b.dataset.tnext);
+    t.status = t.status==="odprta" ? "v_teku" : t.status==="v_teku" ? "koncana" : "odprta";
+    markDirty(); render();
+  });
+
+  const on=(id,fn)=>{ const el=$("#"+id); if(el) el.onclick=fn; };
+  on("addReq", ()=>editForm("requirements"));
+  on("addReg", ()=>editForm("regulations"));
+  on("addPol", ()=>editForm("policies"));
+  on("addProc",()=>editForm("processes"));
+  on("addTask",()=>editForm("tasks"));
+  on("addOwner",()=>editForm("owners"));
+
+  if(page==="reqs"){
+    $("#fq").oninput = e=>{ reqFilter.q=e.target.value; const p=e.target.selectionStart; render(); const f=$("#fq"); f.focus(); f.setSelectionRange(p,p); };
+    $("#fstat").onchange = e=>{ reqFilter.status=e.target.value; render(); };
+    $("#frisk").onchange = e=>{ reqFilter.risk=e.target.value; render(); };
+    $("#freg").onchange = e=>{ reqFilter.reg=e.target.value; render(); };
+  }
+
+  if(page==="ai"){
+    $("#aiIn").oninput = e=> aiText = e.target.value;
+    const runLocal = ()=>{ aiOut = localExtract(aiText); $("#aiResult").innerHTML = aiOut.length? aiOutHTML() : '<div class="empty">V besedilu ni bilo prepoznane nobene obveznosti. Poskusite z daljšim odlomkom.</div>'; bindAdopt(); };
+    $("#aiLocal").onclick = runLocal;
+    $("#aiRun").onclick = async ()=>{
+      if(!state.settings.ai.enabled) return runLocal();
+      $("#aiResult").innerHTML = '<div class="empty">Analiziram…</div>';
+      try{ aiOut = await aiRun(aiText); $("#aiResult").innerHTML = aiOutHTML(); bindAdopt(); }
+      catch(err){ toast("AI ni odgovoril ("+err.message+") — uporabljena lokalna analiza."); runLocal(); }
+    };
+    bindAdopt();
+  }
+
+  if(page==="report"){
+    on("csvReq", ()=>{
+      const rows=[["Oznaka","Zahteva","Predpis","Tveganje","Nosilec","Rok","Stanje","Vpliv (št. procesov)","Procesi"]];
+      state.requirements.forEach(r=>{ const g=state.regulations.find(x=>x.id===r.regId); const im=impact(r);
+        rows.push([r.code,r.title,g?g.code:"",TVEGANJA[r.risk]?TVEGANJA[r.risk].l:"",ownerName(r.ownerId),r.due||"",STATUSI[r.status].l,im.length,im.map(i=>i.p.code).join(" ")]); });
+      download("zahteve.csv", toCSV(rows), "text/csv");
+    });
+    on("csvImp", ()=>{
+      const ps=state.processes; const rows=[["Zahteva"].concat(ps.map(p=>p.code))];
+      state.requirements.forEach(r=>{ const ids=new Set(impact(r).map(i=>i.p.id)); rows.push([r.code].concat(ps.map(p=>ids.has(p.id)?"X":""))); });
+      download("matrika-vplivov.csv", toCSV(rows), "text/csv");
+    });
+    on("expJson", ()=> download(FILE_NAME, JSON.stringify(state,null,2)));
+  }
+
+  if(page==="setup"){
+    on("pickDir", pickFolder);
+    on("saveNow", ()=>writeToDisk(false));
+    on("expJson2", ()=> download(FILE_NAME, JSON.stringify(state,null,2)));
+    on("impJson", ()=> $("#impFile").click());
+    $("#impFile").onchange = async e=>{
+      const f=e.target.files[0]; if(!f) return;
+      try{ state = migrate(JSON.parse(await f.text())); markDirty(); render(); toast("Podatki uvoženi."); }
+      catch(err){ toast("Datoteke ni bilo mogoče prebrati."); }
+    };
+    $("#orgName").onchange = e=>{ state.meta.org=e.target.value; markDirty(); };
+    $("#thr").onchange = e=>{ state.settings.match.threshold=Number(e.target.value)||2; markDirty(); render(); };
+    $("#aiOn").onchange = e=>{ state.settings.ai.enabled = e.target.value==="1"; markDirty(); aiPillUpdate(); };
+    ["aiAcc:accountId","aiTok:token","aiModel:model","aiEp:endpoint"].forEach(pair=>{
+      const [id,key]=pair.split(":"); $("#"+id).onchange = e=>{ state.settings.ai[key]=e.target.value.trim(); markDirty(); };
+    });
+    on("aiTest", async ()=>{
+      const out=$("#aiTestOut"); out.textContent="Preverjam…";
+      try{ const r = await aiRun("Zavezanec mora incident prijaviti nadzornemu organu najkasneje v 24 urah."); out.textContent = "Povezava deluje. Prepoznanih obveznosti: "+r.length+"."; }
+      catch(err){ out.textContent = "Ni uspelo: "+err.message+". Preverite Account ID, žeton ali uporabite lasten endpoint (CORS)."; }
+    });
+    on("loadDemo", ()=>{ if(confirm("Zamenjam trenutne podatke z demo naborom?")){ state=seed(); markDirty(); render(); toast("Demo podatki naloženi."); } });
+    on("wipe", ()=>{ if(confirm("Izbrišem vse podatke? Tega ni mogoče razveljaviti.")){ state=seedEmpty(); markDirty(); render(); toast("Vse izpraznjeno."); } });
+  }
+}
+function bindAdopt(){
+  document.querySelectorAll("[data-adopt]").forEach(b=> b.onclick=()=>{
+    const c = aiOut[Number(b.dataset.adopt)];
+    const rec = {id:uid("req"), regId:(state.regulations[0]||{}).id||"", code:"NEW-"+(state.requirements.length+1),
+      title:c.title, description:c.description, tags:c.tags, risk:"srednje", due:plusDays(90),
+      ownerId:(state.owners.find(o=>/legal/i.test(o.name))||state.owners[0]||{}).id||"", status:"nova",
+      linked:[], excluded:[], evidence:"", created:todayISO()};
+    state.requirements.push(rec); logIt("Iz analize besedila uvožena zahteva: "+rec.title);
+    markDirty(); toast("Uvoženo v register."); editForm("requirements", rec.id);
+  });
+}
+function toCSV(rows){
+  return "\uFEFF" + rows.map(r=>r.map(c=>{ const s=String(c==null?"":c); return /[";\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s; }).join(";")).join("\n");
+}
+function aiPillUpdate(){
+  const a=state.settings.ai, d=$("#aiPill .dot"), t=$("#aiTxt");
+  if(a.enabled){ d.className="dot ok"; t.textContent="AI vklopljen"; } else { d.className="dot off"; t.textContent="AI izklopljen"; }
+}
+
+/* ---------- globalni gumbi ---------- */
+$("#drawerClose").onclick = closeDrawer;
+$("#scrim").onclick = closeDrawer;
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeDrawer(); });
+$("#saveBtn").onclick = ()=> writeToDisk(false);
+$("#setupBtn").onclick = ()=>{ page="setup"; render(); window.scrollTo(0,0); };
+$("#themeBtn").onclick = ()=>{
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur==="dark" ? "light" : cur==="light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
+  document.documentElement.setAttribute("data-theme", next);
+  try{ localStorage.setItem("aic_theme", next); }catch(e){}
+};
+
+/* ---------- zagon ---------- */
+(async function init(){
+  try{ const th=localStorage.getItem("aic_theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+  let loaded = null;
+  try{ const raw=localStorage.getItem(LS_KEY); if(raw) loaded = JSON.parse(raw); }catch(e){}
+  state = loaded ? migrate(loaded) : seed();
+  await restoreFolder();
+  render();
+  if(!loaded) markDirty();
+})();
+</script>
+</body>
+</html>
